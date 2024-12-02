@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: spring-container
-        image: yeonheelee/travelwonpick-server:13
+        image: yeonheelee/travelwonpick-server:16
         ports:
         - containerPort: 8080
         envFrom:
