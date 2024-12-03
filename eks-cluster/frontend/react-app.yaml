@@ -18,7 +18,7 @@ spec:
       - name: react-container
         securityContext:
           readOnlyRootFilesystem: false
-        image: yeonheelee/travelwonpick-client:24
+        image: yeonheelee/travelwonpick-client:25
         ports:
         - containerPort: 80
         env:
