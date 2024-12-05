@@ -2,3 +2,5 @@
 nginx-config.yaml
 spring-secret.yaml
 react-env-var.yaml
+spring-ingress.yaml
+react-ingress.yaml
