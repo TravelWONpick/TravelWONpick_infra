@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: react-ingress
+  namespace: frontend
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:116981768768:certificate/acb9a34b-b274-4b5b-8206-8ab96c76dba1
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/subnets: subnet-01cdff0fd052a79fe, subnet-0ac203a80da1b6e8b
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=60
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=60
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: react-app
+                port:
+                  number: 80
+          - path: /grafana/
+            pathType: Prefix
+            backend:
+              service:
+                name: react-app
+                port:
+                  number: 80
