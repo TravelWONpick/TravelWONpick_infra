@@ -4,7 +4,7 @@ metadata:
   name: react-deploy
   namespace: frontend
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: react
@@ -76,7 +76,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: react-deploy
-  minReplicas: 3
+  minReplicas: 4
   maxReplicas: 30
   metrics:
     - type: Resource
@@ -84,7 +84,7 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 60
+          averageUtilization: 75
     - type: Resource
       resource:
         name: memory
@@ -93,13 +93,13 @@ spec:
           averageUtilization: 60
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 30
+      stabilizationWindowSeconds: 60
       policies:
         - type: Pods
-          value: 4
-          periodSeconds: 30
+          value: 2
+          periodSeconds: 60
     scaleDown:
-      stabilizationWindowSeconds: 180
+      stabilizationWindowSeconds: 300
       policies:
         - type: Pods
           value: 1
