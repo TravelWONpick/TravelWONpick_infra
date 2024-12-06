@@ -15,6 +15,13 @@ spec:
   rules:
     - http:
         paths:
+          - path: /actuator
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-app
+                port:
+                  number: 8080
           - path: /auth
             pathType: Prefix
             backend:
@@ -36,6 +43,13 @@ spec:
                 name: spring-app
                 port:
                   number: 8080
+          - path: /cards
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-app
+                port:
+                  number: 8080
           - path: /events
             pathType: Prefix
             backend:
@@ -50,7 +64,14 @@ spec:
                 name: spring-app
                 port:
                   number: 8080
-          - path: /cards
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-app
+                port:
+                  number: 8080
+          - path: /order
             pathType: Prefix
             backend:
               service:
