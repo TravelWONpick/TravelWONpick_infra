@@ -30,10 +30,10 @@ spec:
           image: yeonheelee/travelwonpick-server:36
           resources:
             requests:
-              cpu: "300m" # Spring Boot는 더 많은 CPU 리소스 필요
+              cpu: "200m" # Spring Boot는 더 많은 CPU 리소스 필요
               memory: "512Mi" # JVM 기반이므로 더 많은 메모리 할당
             limits:
-              cpu: "600m" # 최대 1 CPU 코어
+              cpu: "250m" # 최대 1 CPU 코어
               memory: "1Gi" # 최대 1GB 메모리
           ports:
             - containerPort: 8080
@@ -74,7 +74,7 @@ spec:
     kind: Deployment
     name: spring-deploy
   minReplicas: 2
-  maxReplicas: 6
+  maxReplicas: 10
   metrics:
     - type: Resource
       resource:
@@ -90,11 +90,11 @@ spec:
           averageUtilization: 60
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 20
+      stabilizationWindowSeconds: 5
       policies:
         - type: Pods
           value: 2
-          periodSeconds: 30
+          periodSeconds: 5
     scaleDown:
       stabilizationWindowSeconds: 30
       policies:
