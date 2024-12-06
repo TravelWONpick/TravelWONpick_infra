@@ -73,15 +73,15 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: spring-deploy
-  minReplicas: 2
-  maxReplicas: 10
+  minReplicas: 3
+  maxReplicas: 20
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 80
+          averageUtilization: 65
     - type: Resource
       resource:
         name: memory
@@ -90,14 +90,14 @@ spec:
           averageUtilization: 60
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 21
-      policies:
-        - type: Pods
-          value: 2
-          periodSeconds: 21
-    scaleDown:
       stabilizationWindowSeconds: 30
       policies:
         - type: Pods
-          value: 1
+          value: 2
           periodSeconds: 30
+    scaleDown:
+      stabilizationWindowSeconds: 180
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60

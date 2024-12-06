@@ -76,8 +76,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: react-deploy
-  minReplicas: 2
-  maxReplicas: 10
+  minReplicas: 3
+  maxReplicas: 30
   metrics:
     - type: Resource
       resource:
@@ -93,14 +93,14 @@ spec:
           averageUtilization: 60
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 5
-      policies:
-        - type: Pods
-          value: 2
-          periodSeconds: 5
-    scaleDown:
       stabilizationWindowSeconds: 30
       policies:
         - type: Pods
-          value: 1
+          value: 4
           periodSeconds: 30
+    scaleDown:
+      stabilizationWindowSeconds: 180
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60
