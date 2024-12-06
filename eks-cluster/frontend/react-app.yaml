@@ -76,14 +76,14 @@ spec:
     kind: Deployment
     name: react-deploy
   minReplicas: 2
-  maxReplicas: 6
+  maxReplicas: 10
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 65
+          averageUtilization: 60
     - type: Resource
       resource:
         name: memory
@@ -92,11 +92,11 @@ spec:
           averageUtilization: 60
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 20
+      stabilizationWindowSeconds: 5
       policies:
         - type: Pods
           value: 2
-          periodSeconds: 30
+          periodSeconds: 5
     scaleDown:
       stabilizationWindowSeconds: 30
       policies:
