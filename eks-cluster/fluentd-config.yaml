@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: logging
+data:
+  fluent.conf: |
+    <system>
+      log_level info
+    </system>
+
+    # 로그 파일 수집
+    <source>
+      @type tail
+      path /app/logs/*.log
+      pos_file /var/log/fluentd.travelwonpick.pos
+      tag spring-app.logs
+      format /^(?<timestamp>[\d\- :]+)\s+(?<severity>\S+)\s+(?<class>\S+):(?<line>\d+)\s+-\s+(?<message>.*)$/ 
+      time_format %Y-%m-%d %H:%M:%S
+      read_from_head true
+    </source>
+
+    # [travelwonpick] 메시지 필터링
+    <filter spring-app.logs>
+      @type grep
+      <regexp>
+        key message
+        pattern ^\[travelwonpick\]\s
+      </regexp>
+    </filter>
+
+    # birth, gender, region, signuptime, passenger 필드 슬라이싱
+    <filter spring-app.logs>
+      @type record_transformer
+      enable_ruby true
+      <record>
+        birth_year ${record["message"].match(/birth=(\d{4})/)[1] rescue nil}
+        gender ${record["message"].match(/gender=(\S+)/)[1] rescue nil}
+        region ${record["message"].match(/region=(\w+)/)[1] rescue nil}
+        signup ${record["message"].match(/signup=(\d{4}-\d{2}-\d{2}\s\d{2})\S/)[1] rescue nil}
+        passenger ${record["message"].match(/passenger=(\d{1})/)[1] rescue nil}
+      </record>
+    </filter>
+
+    # Elasticsearch로 전송
+    <match spring-app.logs>
+      @type elasticsearch
+      host management-alb-1530886175.ap-northeast-2.elb.amazonaws.com
+      port 9200
+      scheme http
+      logstash_format false
+      index_name travelwonpick-final-logs
+      include_timestamp true
+      time_key timestamp
+      time_key_format %Y-%m-%d %H:%M:%S
+      <buffer>
+        flush_interval 5s
+      </buffer>
+    </match>
+
