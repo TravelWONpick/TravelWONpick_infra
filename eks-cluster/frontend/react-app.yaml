@@ -76,7 +76,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: react-deploy
-  minReplicas: 4
+  minReplicas: 2
   maxReplicas: 30
   metrics:
     - type: Resource
