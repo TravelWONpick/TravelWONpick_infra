@@ -29,7 +29,7 @@ spec:
         - name: react-container
           securityContext:
             readOnlyRootFilesystem: false
-          image: yeonheelee/travelwonpick-client:48
+          image: yeonheelee/travelwonpick-client:49
           resources:
             requests:
               cpu: "50m"
