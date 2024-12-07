@@ -27,7 +27,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: spring-container
-          image: yeonheelee/travelwonpick-server:36
+          image: yeonheelee/travelwonpick-server:37
           resources:
             requests:
               cpu: "300m" # Spring Boot는 더 많은 CPU 리소스 필요
