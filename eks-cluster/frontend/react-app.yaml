@@ -77,7 +77,7 @@ spec:
     kind: Deployment
     name: react-deploy
   minReplicas: 4
-  maxReplicas: 30
+  maxReplicas: 10
   metrics:
     - type: Resource
       resource:
