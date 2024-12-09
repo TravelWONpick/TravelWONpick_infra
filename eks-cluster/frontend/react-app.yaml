@@ -96,11 +96,11 @@ spec:
       stabilizationWindowSeconds: 10
       policies:
         - type: Pods
-          value: 3
+          value: 1
           periodSeconds: 10
     scaleDown:
-      stabilizationWindowSeconds: 60
+      stabilizationWindowSeconds: 90
       policies:
         - type: Pods
           value: 1
-          periodSeconds: 60
+          periodSeconds: 90
