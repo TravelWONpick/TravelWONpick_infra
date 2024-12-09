@@ -32,7 +32,7 @@ spec:
           image: yeonheelee/travelwonpick-client:50
           resources:
             requests:
-              cpu: "80m"
+              cpu: "70m"
               memory: "64Mi"
             limits:
               cpu: "200m"

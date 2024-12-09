@@ -30,7 +30,7 @@ spec:
           image: yeonheelee/travelwonpick-server:37
           resources:
             requests:
-              cpu: "150m" # Spring Boot는 더 많은 CPU 리소스 필요
+              cpu: "140m" # Spring Boot는 더 많은 CPU 리소스 필요
               memory: "512Mi" # JVM 기반이므로 더 많은 메모리 할당
             limits:
               cpu: "300m" # 최대 1 CPU 코어
