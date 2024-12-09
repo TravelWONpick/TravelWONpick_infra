@@ -32,11 +32,11 @@ spec:
           image: yeonheelee/travelwonpick-client:50
           resources:
             requests:
-              cpu: "50m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
             limits:
-              cpu: "150m"
-              memory: "512Mi"
+              cpu: "200m"
+              memory: "256Mi"
           ports:
             - containerPort: 80
           envFrom:
@@ -84,23 +84,23 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 75
+          averageUtilization: 70
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 60
+          averageUtilization: 70
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 60
+      stabilizationWindowSeconds: 20
       policies:
         - type: Pods
           value: 2
-          periodSeconds: 60
+          periodSeconds: 20
     scaleDown:
-      stabilizationWindowSeconds: 300
+      stabilizationWindowSeconds: 30
       policies:
         - type: Pods
           value: 1
-          periodSeconds: 60
+          periodSeconds: 30

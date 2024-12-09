@@ -33,7 +33,7 @@ spec:
               cpu: "300m" # Spring Boot는 더 많은 CPU 리소스 필요
               memory: "512Mi" # JVM 기반이므로 더 많은 메모리 할당
             limits:
-              cpu: "450m" # 최대 1 CPU 코어
+              cpu: "600m" # 최대 1 CPU 코어
               memory: "1Gi" # 최대 1GB 메모리
           ports:
             - containerPort: 8080
@@ -87,7 +87,7 @@ spec:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 60
+          averageUtilization: 70
   behavior:
     scaleUp:
       stabilizationWindowSeconds: 20
